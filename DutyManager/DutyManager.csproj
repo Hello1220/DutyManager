@@ -8,4 +8,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Views\Windows\软件图标.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Windows\软件图标.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Controls\" />
+  </ItemGroup>
+
 </Project>

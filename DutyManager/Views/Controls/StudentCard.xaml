@@ -1,0 +1,16 @@
+<UserControl x:Class="DutyManager.Views.Controls.StudentCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Background="#FFF0F0F0" CornerRadius="5" Padding="15" 
+            BorderBrush="#FFCCCCCC" BorderThickness="1">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+            <Ellipse Width="60" Height="60">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/Resources/user_icon.png"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold" 
+                       HorizontalAlignment="Center" Margin="0,10"/>
+        </StackPanel>
+    </Border>
+</UserControl>
