@@ -1,44 +1,48 @@
 ﻿using DutyManager.Data.Repositories;
 using DutyManager.Data.Services;
-using DutyManager.ViewModels;
-using DutyManager.Views.Windows;
+using System.Threading.Tasks;
 using System.Windows;
 
-namespace DutyManager
+public partial class App : Application
 {
-    public partial class App : Application
+    protected override async void OnStartup(StartupEventArgs e)
     {
-        private SplashScreen _splashScreen;
+        base.OnStartup(e);
 
-        protected override async void OnStartup(StartupEventArgs e)
+        // 初始化数据库
+        var repository = new SqliteDutyRepository();
+        await repository.InitializeAsync();
+
+        // 创建服务
+        var dutyService = new DutyService(repository);
+
+        // 确保有默认配置
+        var config = await repository.GetDutyConfigAsync();
+        if (config.Id == 0) // 新配置
         {
-            base.OnStartup(e);
-
-            // 显示启动画面
-            _splashScreen = new SplashScreen("Resources/splash.png");
-            _splashScreen.Show(false);
-
-            // 初始化数据库和服务
-            await InitializeAppAsync();
-
-            // 关闭启动画面，打开主窗口
-            _splashScreen.Close(TimeSpan.FromSeconds(0.3));
-            new MainWindow().Show();
+            await repository.SaveDutyConfigAsync(config);
         }
 
-        private async Task InitializeAppAsync()
+        // 确保有默认学生数据（可选）
+        var students = await repository.GetStudentsAsync();
+        if (!students.Any())
         {
-            var repository = new SqliteDutyRepository();
-            await repository.InitializeAsync();
-
-            var dutyService = new DutyService(repository);
-            await dutyService.InitializeDefaultDataAsync();
-
-            // 创建主窗口数据上下文
-            MainWindow = new MainWindow
+            // 添加示例学生
+            var defaultStudents = new List<Student>
             {
-                DataContext = new MainViewModel(dutyService)
+                new() { Name = "张三" },
+                new() { Name = "李四" },
+                new() { Name = "王五" }
             };
+            await repository.SaveStudentsAsync(defaultStudents);
         }
+
+        // 创建主窗口
+        var mainWindow = new MainWindow
+        {
+            DataContext = new MainViewModel(dutyService)
+        };
+
+        mainWindow.Show();
     }
 }

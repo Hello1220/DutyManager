@@ -3,6 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
+
+public partial class Student : ObservableObject
+{
+    [ObservableProperty]
+    private int _id;
+
+    [ObservableProperty]
+    private string _name = string.Empty;
+
+    [ObservableProperty]
+    private bool _isActive = true;
+}
 
 namespace DutyManager.Data.Models
 {

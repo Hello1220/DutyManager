@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:DutyManager.ViewModels"
         xmlns:controls="clr-namespace:DutyManager.Views.Controls"
-        Title="°à¼¶ÖµÈÕÉú¹ÜÀíÏµÍ³" Height="500" Width="800">
+        Title="ç­çº§å€¼æ—¥ç”Ÿç®¡ç†ç³»ç»Ÿ" Height="500" Width="800"
+        Language="zh-CN">
 
     <Window.DataContext>
         <vm:MainViewModel/>
@@ -16,7 +17,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- ±êÌâÀ¸ -->
+        <!-- æ ‡é¢˜æ  -->
         <Border Background="#FF007ACC" Padding="15">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="DutyManager" Foreground="White" FontSize="20" FontWeight="Bold"/>
@@ -24,15 +25,15 @@
             </StackPanel>
         </Border>
 
-        <!-- Ö÷ÄÚÈÝ -->
+        <!-- ä¸»å†…å®¹ -->
         <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- ½ñÈÕÖµÈÕÉú -->
-            <GroupBox Header="½ñÈÕÖµÈÕÉú" Padding="10">
+            <!-- ä»Šæ—¥å€¼æ—¥ç”Ÿ -->
+            <GroupBox Header="ä»Šæ—¥å€¼æ—¥ç”Ÿ" Padding="10">
                 <ItemsControl ItemsSource="{Binding TodayDutyStudents}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -47,20 +48,20 @@
                 </ItemsControl>
             </GroupBox>
 
-            <!-- ±¾ÖÜÖµÈÕÈÕÀú -->
-            <GroupBox Header="±¾ÖÜÖµÈÕ°²ÅÅ" Grid.Column="1" Padding="10" Width="300">
+            <!-- æœ¬å‘¨å€¼æ—¥æ—¥åŽ† -->
+            <GroupBox Header="æœ¬å‘¨å€¼æ—¥å®‰æŽ’" Grid.Column="1" Padding="10" Width="300">
                 <controls:WeekCalendar/>
             </GroupBox>
         </Grid>
 
-        <!-- ×´Ì¬À¸ -->
+        <!-- çŠ¶æ€æ  -->
         <StatusBar Grid.Row="2">
             <StatusBarItem>
                 <TextBlock Text="{Binding NextRotationText}"/>
             </StatusBarItem>
             <Separator/>
-            <Button Content="Ë¢ÐÂ" Command="{Binding RefreshCommand}" Padding="10,2"/>
-            <Button Content="ÉèÖÃ" Command="{Binding OpenSettingsCommand}" Padding="10,2"/>
+            <Button Content="åˆ·æ–°" Command="{Binding RefreshCommand}" Padding="10,2"/>
+            <Button Content="è®¾ç½®" Command="{Binding OpenSettingsCommand}" Padding="10,2"/>
         </StatusBar>
     </Grid>
 </Window>
